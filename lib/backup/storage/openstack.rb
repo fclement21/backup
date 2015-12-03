@@ -14,7 +14,7 @@ module Backup
 
       ##
       # OpenStack storage container name and path
-      attr_accessor :container, :path
+      attr_accessor :container, :path, :keep
 
       ##
       # Creates a new instance of the storage object
@@ -51,12 +51,13 @@ module Backup
       def transfer!
         remote_path = remote_path_for(@package)
         local_path = Config.tmp_path
+        Logger.info "Keep = #{keep}"
         @package.filenames.each do |local_file, remote_file|
           Logger.info "#{storage_name} started transferring '#{ local_file }'."
           # connection.directories.get("#{container}").files.create :key => "#{Time.now.strftime("%Y.%m.%d")}_#{local_file}", :body => File.open(File.join(local_path, local_file))
           connection.directories.get("#{container}").files.create :key => "#{Time.now}_#{local_file}", :body => File.open(File.join(local_path, local_file))
-          cycle!
         end
+        # if connection.directories.get("#{container}").count > keep
       end
 
       ##
