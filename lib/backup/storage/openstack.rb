@@ -49,6 +49,11 @@ module Backup
       ##
       # Transfers the archived file to the specified container
       def transfer!
+        Logger.info @connection
+        Logger.info provider
+        Logger.info username
+        Logger.info api_key
+        Logger.info auth_url
         remote_path = remote_path_for(@package)
         local_path = Config.tmp_path
         @package.filenames.each do |local_file, remote_file|
