@@ -49,22 +49,11 @@ module Backup
       ##
       # Transfers the archived file to the specified container
       def transfer!
-        Logger.info connection
-        Logger.info provider
-        Logger.info username
-        Logger.info api_key
-        Logger.info auth_url
         remote_path = remote_path_for(@package)
         local_path = Config.tmp_path
         @package.filenames.each do |local_file, remote_file|
           Logger.info "#{storage_name} started transferring '#{ local_file }'."
-
-          # File.open(File.join(local_path, local_file), 'r') do |file|
-          #   connection.put_object(
-          #     container, File.join(remote_path, remote_file), file
-          #   )
-          # end
-          connection.directories.get("#{container}").files.create :key => "#{local_file}", :body => File.open(File.join(local_path, local_file))
+          connection.directories.get("#{container}").files.create :key => "#{Time.now.strftime("%Y.%m.%d")}_#{local_file}", :body => File.open(File.join(local_path, local_file))
         end
       end
 
@@ -75,10 +64,11 @@ module Backup
       def remove!(package)
         remote_path = remote_path_for(package)
 
-        transferred_files_for(package) do |local_file, remote_file|
+        package.filenames.each do |local_file, remote_file|
           Logger.info "#{storage_name} started removing '#{ local_file }' " +
               "from container '#{ container }'."
-          connection.delete_object(container, File.join(remote_path, remote_file))
+          # connection.delete_object(container, File.join(remote_path, remote_file))
+          connection.directories.get("#{container}").files.get(remote_file).destroy
         end
       end
 
