@@ -4,7 +4,7 @@ require 'backup/cloud_io/cloud_files'
 module Backup
   module Syncer
     module Cloud
-      class CloudFiles < Base
+      class CloudFiles < OpenStack
         class Error < Backup::Error; end
 
         ##
@@ -41,7 +41,7 @@ module Backup
           check_configuration
         end
 
-        private
+        protected
 
         def cloud_io
           @cloud_io ||= CloudIO::CloudFiles.new(

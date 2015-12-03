@@ -1,9 +1,9 @@
 # encoding: utf-8
-require 'backup/cloud_io/cloud_files'
+# require 'backup/cloud_io/cloud_files'
 
 module Backup
   module Storage
-    class CloudFiles < Base
+    class CloudFiles < OpenStack
       include Storage::Cycler
       class Error < Backup::Error; end
 
@@ -85,7 +85,7 @@ module Backup
         check_configuration
       end
 
-      private
+      protected
 
       def cloud_io
         @cloud_io ||= CloudIO::CloudFiles.new(
