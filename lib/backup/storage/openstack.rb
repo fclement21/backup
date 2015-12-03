@@ -49,8 +49,8 @@ module Backup
       # Transfers the archived file to the specified container
       def transfer!
         remote_path = remote_path_for(@package)
-          Logger.info "Info package #{@package}"
-        files_to_transfer_for(@package) do |local_file, remote_file|
+        Logger.info "Info package #{@package.filenames}"
+        @package.filenames.each do |local_file, remote_file|
           Logger.info "#{storage_name} started transferring '#{ local_file }'."
 
           File.open(File.join(local_path, local_file), 'r') do |file|
