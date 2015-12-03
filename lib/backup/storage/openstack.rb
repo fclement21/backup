@@ -41,7 +41,7 @@ module Backup
           :provider             => provider,
           :openstack_username   => username,
           :openstack_api_key    => api_key,
-          :openstack_auth_url   => auth_url
+          :openstack_auth_url   => auth_url,
           :connection_options       => {ssl_verify_peer: false }
         )
       end
