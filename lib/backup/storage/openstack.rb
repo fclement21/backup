@@ -49,7 +49,7 @@ module Backup
       ##
       # Transfers the archived file to the specified container
       def transfer!
-        Logger.info @connection
+        Logger.info connection
         Logger.info provider
         Logger.info username
         Logger.info api_key
@@ -64,7 +64,7 @@ module Backup
           #     container, File.join(remote_path, remote_file), file
           #   )
           # end
-          @connection.directories.get("#{container}").files.create :key => "#{local_file}", :body => File.open(File.join(local_path, local_file))
+          connection.directories.get("#{container}").files.create :key => "#{local_file}", :body => File.open(File.join(local_path, local_file))
         end
       end
 
