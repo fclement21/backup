@@ -30,14 +30,14 @@ module Backup
               ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Riak', 'OpenLDAP', 'SQLite'],
               # Storages
               ['S3', 'CloudFiles', 'Ninefold', 'Dropbox', 'FTP',
-              'SFTP', 'SCP', 'RSync', 'Local'],
+              'SFTP', 'SCP', 'RSync', 'Local', 'OpenStack'],
               # Compressors
               ['Gzip', 'Bzip2', 'Custom', 'Pbzip2', 'Lzma'],
               # Encryptors
               ['OpenSSL', 'GPG'],
               # Syncers
               [
-                { 'Cloud' => ['CloudFiles', 'S3'] },
+                { 'Cloud' => ['CloudFiles', 'S3', 'OpenStack'] },
                 { 'RSync' => ['Push', 'Pull', 'Local'] }
               ],
               # Notifiers
