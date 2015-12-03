@@ -57,7 +57,10 @@ module Backup
           # connection.directories.get("#{container}").files.create :key => "#{Time.now.strftime("%Y.%m.%d")}_#{local_file}", :body => File.open(File.join(local_path, local_file))
           connection.directories.get("#{container}").files.create :key => "#{Time.now}_#{local_file}", :body => File.open(File.join(local_path, local_file))
         end
-        # if connection.directories.get("#{container}").count > keep
+        if connection.directories.get("#{container}").count >= keep
+          Logger.info "Remove last authot_backup"
+          connection.directories.get("#{container}").files.first.destroy
+        end
       end
 
       ##
