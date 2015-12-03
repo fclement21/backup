@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+require 'fog'
 ##
 # Only load the Fog gem when the Backup::Storage::OpenStack class is loaded
 # Backup::Dependency.load('fog')
@@ -49,9 +49,7 @@ module Backup
       # Transfers the archived file to the specified container
       def transfer!
         remote_path = remote_path_for(@package)
-        local_path = "/Users/dANO-/Backup/.tmp/"
-
-        Logger.info "tmp path : #{Config.tmp_path}"
+        local_path = Config.tmp_path
         @package.filenames.each do |local_file, remote_file|
           Logger.info "#{storage_name} started transferring '#{ local_file }'."
 
