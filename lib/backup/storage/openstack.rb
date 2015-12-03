@@ -51,7 +51,7 @@ module Backup
         remote_path = remote_path_for(@package)
         local_path = "/Users/dANO-/Backup/.tmp/"
 
-        Logger.info "Info package #{@package.path}"
+        Logger.info "tmp path : #{Config.tmp_path}"
         @package.filenames.each do |local_file, remote_file|
           Logger.info "#{storage_name} started transferring '#{ local_file }'."
 
