@@ -54,11 +54,12 @@ module Backup
         @package.filenames.each do |local_file, remote_file|
           Logger.info "#{storage_name} started transferring '#{ local_file }'."
 
-          File.open(File.join(local_path, local_file), 'r') do |file|
-            connection.put_object(
-              container, File.join(remote_path, remote_file), file
-            )
-          end
+          # File.open(File.join(local_path, local_file), 'r') do |file|
+          #   connection.put_object(
+          #     container, File.join(remote_path, remote_file), file
+          #   )
+          # end
+          @connection.directories.get("#{container}").files.create :key => "#{local_file}", :body => File.open(File.join(local_path, local_file))
         end
       end
 
