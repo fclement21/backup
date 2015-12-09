@@ -10,7 +10,7 @@ module Backup
 
       ##
       # OpenStack credentials
-      attr_accessor :username, :api_key, :auth_url
+      attr_accessor :username, :api_key, :auth_url, :region
 
       ##
       # OpenStack storage container name and path
@@ -22,6 +22,7 @@ module Backup
         super(model, storage_id)
 
         @path       ||= 'backups'
+        @region     ||= nil
 
         instance_eval(&block) if block_given?
       end
@@ -33,7 +34,6 @@ module Backup
       def provider
         'OpenStack'
       end
-
       ##
       # Establishes a connection
       def connection
@@ -42,6 +42,7 @@ module Backup
           :openstack_username   => username,
           :openstack_api_key    => api_key,
           :openstack_auth_url   => auth_url,
+          :openstack_region     => region,
           :connection_options       => {ssl_verify_peer: false }
         )
       end

@@ -7,7 +7,7 @@ module Backup
 
         ##
         # OpenStack redentials
-        attr_accessor :api_key, :username
+        attr_accessor :api_key, :username, :region
 
         ##
         # OpenStack container
@@ -32,6 +32,7 @@ module Backup
 
           instance_eval(&block) if block_given?
           @path = path.sub(/^\//, '')
+          @region ||= nil
         end
 
         protected
@@ -43,7 +44,8 @@ module Backup
             :provider             => provider,
             :openstack_username   => username,
             :openstack_api_key    => api_key,
-            :openstack_auth_url   => auth_url
+            :openstack_auth_url   => auth_url,
+            :openstack_region     => region
           )
         end
 

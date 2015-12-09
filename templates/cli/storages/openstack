@@ -8,4 +8,5 @@ store_with OpenStack do |os|
   os.path       = "/path/to/my/backups"
   os.keep       = 5
   os.auth_url   = "https://dal05.objectstorage.softlayer.net/auth/v1.0"
+  os.region     = "FR"
 end

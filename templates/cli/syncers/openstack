@@ -27,6 +27,7 @@
     os.mirror            = true
     os.concurrency_type  = false
     os.concurrency_level = 2
+    os.region            = "FR"
 
     os.directories do |directory|
       directory.add "/path/to/directory/to/sync"
