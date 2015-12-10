@@ -54,8 +54,8 @@ module Backup
         local_path = Config.tmp_path
         @package.filenames.each do |local_file, remote_file|
           Logger.info "#{storage_name} started transferring '#{ local_file }'."
-          # connection.directories.get("#{container}").files.create :key => "#{Time.now.strftime("%Y.%m.%d")}_#{local_file}", :body => File.open(File.join(local_path, local_file))
-          connection.directories.get("#{container}").files.create :key => "#{Time.now}_#{local_file}", :body => File.open(File.join(local_path, local_file))
+          connection.directories.get("#{container}").files.create :key => "#{Time.now.strftime("%Y.%m.%d")}_#{local_file}", :body => File.open(File.join(local_path, local_file))
+          # connection.directories.get("#{container}").files.create :key => "#{Time.now}_#{local_file}", :body => File.open(File.join(local_path, local_file))
         end
         if connection.directories.get("#{container}").count.to_i > keep
           Logger.info "Remove first #{connection.directories.get("#{container}").files.first.key}"
