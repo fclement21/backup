@@ -6,8 +6,8 @@ module Backup
       class OpenStack < Base
 
         ##
-        # OpenStack redentials
-        attr_accessor :api_key, :username, :region
+        # OpenStack credentials
+        attr_accessor :username, :api_key, :auth_url, :region, :tenant_id, :tenant
 
         ##
         # OpenStack container
@@ -44,6 +44,8 @@ module Backup
             :provider             => provider,
             :openstack_username   => username,
             :openstack_api_key    => api_key,
+            :openstack_tenant_id  => tenant_id,
+            :openstack_tenant     => tenant,
             :openstack_auth_url   => auth_url,
             :openstack_region     => region
           )

@@ -10,7 +10,7 @@ module Backup
 
       ##
       # OpenStack credentials
-      attr_accessor :username, :api_key, :auth_url, :region
+      attr_accessor :username, :api_key, :auth_url, :region, :tenant_id, :tenant
 
       ##
       # OpenStack storage container name and path
@@ -41,6 +41,8 @@ module Backup
           :provider             => provider,
           :openstack_username   => username,
           :openstack_api_key    => api_key,
+          :openstack_tenant_id  => tenant_id,
+          :openstack_tenant     => tenant,
           :openstack_auth_url   => auth_url,
           :openstack_region     => region,
           :connection_options       => {ssl_verify_peer: false }
